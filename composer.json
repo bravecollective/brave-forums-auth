@@ -9,23 +9,13 @@
     "type": "project",
     "require": {
         "laravel/framework": "5.0.*",
-        "bravecollective/php-api": "dev-master",
-        "necrotex/laravel-brave-core": "dev-master"
+        "illuminate/html": "5.0.*",
+        "necrotex/laravel-brave-core": "0.1.*"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
         "phpspec/phpspec": "~2.1"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/bravecollective/laravel-brave-core"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/bravecollective/php-api"
-        }
-    ],
     "autoload": {
         "classmap": [
             "database"
