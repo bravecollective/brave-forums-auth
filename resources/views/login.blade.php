@@ -39,6 +39,7 @@
 
 
 <form action="" method="POST" class="form-signin well">
+    <input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<h2 class="form-signin-heading">Sign In</h2>
 
 	<!-- check for login error flash var -->
@@ -46,7 +47,7 @@
 	if (Session::has('flash_error'))
 	{
 		?>
-		<div id="flash_error" class="alert alert-danger"><?=Session::get('flash_error')?></div>
+		<div id="flash_error" class="alert alert-danger">{{ Session::get('flash_error') }}</div>
 	<?php
 	}
 	?>
