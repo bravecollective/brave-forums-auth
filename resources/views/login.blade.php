@@ -58,3 +58,4 @@
 
 	<button class="btn btn-primary btn-lg btn-block" type="submit">Click Here to Authorize</button>
 </form>
+@endsection
