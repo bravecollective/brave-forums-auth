@@ -17,6 +17,12 @@
         "phpunit/phpunit": "~4.0",
         "phpspec/phpspec": "~2.1"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/bravecollective/php-api"
+        }
+    ],
     "autoload": {
         "classmap": [
             "database"
