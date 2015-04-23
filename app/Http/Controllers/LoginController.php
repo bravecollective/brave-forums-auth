@@ -1,9 +1,15 @@
 <?php namespace App\Http\Controllers;
 
+/**
+ * Class LoginController
+ *
+ * @package App\Http\Controllers
+ */
 class LoginController extends Controller {
 
-	const LAYOUT = 'layouts.login';
-
+	/**
+	 * @var null
+	 */
 	private $api = null;
 
 	/*
@@ -19,22 +25,25 @@ class LoginController extends Controller {
 	|
 	*/
 
+	/**
+	 *
+	 */
 	public function __construct()
 	{
 		$this->api = \App::make('CoreApi');
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function loginView()
 	{
-		$this->layout = self::LAYOUT;
-		$view = \View::make(self::LAYOUT)
-		            ->nest('navigation', 'navigation')
-		            ->nest('footer', 'parts/footer')
-		            ->nest('page_content', 'login');
-
-		return $view;
+		return view('login');
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function loginAction()
 	{
 		// API Call Args
@@ -47,6 +56,9 @@ class LoginController extends Controller {
 		return \Redirect::to($result->location);
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function infoAction()
 	{
 		$token = \Input::get('token', false);
@@ -67,6 +79,9 @@ class LoginController extends Controller {
 		}
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function logoutAction()
 	{
 		//$token = Auth::user()->token;
@@ -77,6 +92,9 @@ class LoginController extends Controller {
 		               ->with('flash_notice', 'You are successfully logged out.');
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function deauthAction()
 	{
 		$user = \Auth::user();

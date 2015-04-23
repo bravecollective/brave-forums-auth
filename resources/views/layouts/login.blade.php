@@ -23,29 +23,14 @@
 
     <!-- Wrap all page content here -->
     <div id="wrap">
-        <?php
-        /*
-         * Load the page content here
-         */
-        echo $navigation;
-        ?>
+        @include('parts.navigation')
 
         <div class="container">
-            <?php
-            /*
-             * Load the page content here
-             */
-            echo $page_content;
-            ?>
+            @yield('content')
         </div> <!-- /container -->
     </div>
 
-    <?php
-    /*
-     * Load the page content here
-     */
-    echo $footer;
-    ?>
+    @include('parts.footer')
 
 </body>
 </html>

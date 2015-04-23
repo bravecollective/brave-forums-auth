@@ -1,3 +1,6 @@
+@extends('layouts/login')
+
+@section('content')
 <style>
 	.form-signin {
 		padding: 15px;

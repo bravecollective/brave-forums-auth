@@ -30,7 +30,8 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('home');
+		$user = \Auth::user();
+		return view('home', ['user' => $user]);
 	}
 
 }

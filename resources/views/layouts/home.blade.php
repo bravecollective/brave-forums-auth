@@ -20,30 +20,17 @@
     </style>
 </head>
 <body>
-	<!-- Wrap all page content here -->
-	<div id="wrap">
-		<?php
-		/*
-		 * Load the page content here
-		 */
-		echo $navigation;
-		?>
 
-		<div class="container">
-			<?php
-			/*
-			 * Load the page content here
-			 */
-			echo $page_content;
-			?>
-		</div> <!-- /container -->
-	</div>
+    <!-- Wrap all page content here -->
+    <div id="wrap">
+        @include('parts.navigation')
 
-	<?php
-	/*
-	 * Load the page content here
-	 */
-	echo $footer;
-	?>
+        <div class="container">
+            @yield('content')
+        </div> <!-- /container -->
+    </div>
+
+    @include('parts.footer')
+
 </body>
 </html>
