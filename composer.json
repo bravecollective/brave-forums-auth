@@ -11,6 +11,7 @@
         "laravel/framework": "5.0.*",
         "illuminate/html": "5.0.*",
         "filp/whoops": "~1.0",
+        "bravecollective/php-api": "dev-master",
         "necrotex/laravel-brave-core": "0.*"
     },
     "require-dev": {
