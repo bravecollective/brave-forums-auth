@@ -1,11 +1,38 @@
-<div id="footer">
-	<div class="container">
-		<p class="text-muted credit">
-			<!--<span class="pull-right">Help</span>-->
-			© Brave - 2015
-		</p>
-	</div>
-</div>
+
+<footer>
+    <div id="footer">
+        <div class="container">
+            <p class="text-muted credit">
+                <!--<span class="pull-right">Help</span>-->
+                © Brave - 2015
+            </p>
+        </div>
+    </div>
+</footer>
+
+
+@section('header-css')
+    <style type="text/css">
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #f5f5f5;
+        }
+
+        .footer .container .text-muted {
+            margin: 20px 0;
+        }
+
+        .footer > .container {
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+    </style>
+@endsection
+
+@section('footer-js')
 <script>
 	$(document).ready(function()
 	{
@@ -44,3 +71,4 @@
 		}, 1000);
 	});
 </script>
+@endsection

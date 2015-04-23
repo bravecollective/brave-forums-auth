@@ -17,6 +17,7 @@
         .jumbotron {
             margin-top: 30px;
         }
+        @yield('header-css')
     </style>
 </head>
 <body>
@@ -32,5 +33,6 @@
 
     @include('parts.footer')
 
+    @yield('footer-js')
 </body>
 </html>
