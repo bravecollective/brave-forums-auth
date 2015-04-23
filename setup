@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+php -r "copy('.env.example', '.env');"
+
+./artisan key:generate
+./artisan optimize
+
+./artisan migrate:install
+./artisan migrate
