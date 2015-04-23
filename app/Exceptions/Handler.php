@@ -1,7 +1,11 @@
 <?php namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Http\Response;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Whoops\Run as WhoopsRun;
+use Whoops\Handler\JsonResponseHandler;
+use Whoops\Handler\PrettyPageHandler;
 
 class Handler extends ExceptionHandler {
 
@@ -32,10 +36,29 @@ class Handler extends ExceptionHandler {
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  \Exception  $e
-	 * @return \Illuminate\Http\Response
+	 * @return Response
 	 */
 	public function render($request, Exception $e)
 	{
+		if (config('app.debug'))
+		{
+			$whoops = new WhoopsRun;
+
+			if ($request->ajax())
+			{
+				$whoops->pushHandler(new JsonResponseHandler);
+			}
+			else
+			{
+				$whoops->pushHandler(new PrettyPageHandler);
+			}
+
+			return response($whoops->handleException($e),
+				$e->getStatusCode(),
+				$e->getHeaders()
+			);
+		}
+
 		return parent::render($request, $e);
 	}
 
