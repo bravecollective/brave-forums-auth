@@ -11,11 +11,15 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::group(array('before' => 'guest'), function()
+{
+	Route::get('login', array('as' => 'login', 'uses' => 'LoginController@loginView'));
+	Route::post('login', array('uses' => 'LoginController@loginAction'));
 
-Route::get('home', 'HomeController@index');
+	Route::get('info', array('as' => 'info', 'uses' => 'LoginController@infoAction'));
+});
 
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+Route::group(array('before' => 'auth'), function() {
+	// Basic URLs
+	Route::get('/', array('as' => 'home', 'uses' => 'HomeController@index'));
+});
