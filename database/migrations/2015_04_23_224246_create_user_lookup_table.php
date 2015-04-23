@@ -30,7 +30,7 @@ class CreateUserLookupTable extends Migration {
      */
     public function down()
     {
-        Schema::drop('user_lookups');
+        Schema::drop('user_lookup');
     }
 
 }
