@@ -22,4 +22,7 @@ Route::group(array('before' => 'guest'), function()
 Route::group(array('before' => 'auth'), function() {
 	// Basic URLs
 	Route::get('/', array('as' => 'home', 'uses' => 'HomeController@index'));
+
+	// Logout of the app
+	Route::get('logout', array('as' => 'logout', 'uses' => 'LoginController@logoutAction'));
 });
