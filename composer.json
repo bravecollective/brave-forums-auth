@@ -19,6 +19,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/bravecollective/laravel-brave-core"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/bravecollective/php-api"
         }
     ],
     "autoload": {
