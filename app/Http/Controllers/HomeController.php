@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\ForumUser;
 use Illuminate\Http\Request;
 use ZxcvbnPhp\Zxcvbn;
 
@@ -31,34 +32,42 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		$user = \Auth::user();
-		return view('home', ['user' => $user]);
+		$auth_user = \Auth::user();
+		$forum_user = ForumUser::firstOrNew(['forum_auth_user_id' => \Auth::user()->id]);
+
+		return view('home', ['user' => $auth_user, 'forum_user' => $forum_user]);
 	}
 
-	/**
-	 * Show the application dashboard to the user.
-	 *
-	 * @param Request $request
-	 * @return Response
-	 */
-	public function updateForumUser(Request $request)
-	{
-		$this->validate($request, [
-			'email' => 'required|unique|max:255',
-			'password' => 'required',
-		]);
+    /**
+     * Update the Forum User
+     *
+     * @param \App\Http\Requests\UpdateFormRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateAction(\App\Http\Requests\UpdateFormRequest $request){
 
-		$userData = array(
-			'Marco',
-			'marco@example.com'
-		);
+        $api = \App::make('CoreApi');
+        $lookup = $api->lookup->character(['search' => \Auth::user()->id]);
 
-		$zxcvbn = new Zxcvbn();
-		$strength = $zxcvbn->passwordStrength('password', $userData);
-		echo $strength['score'];
+        $user = ForumUser::firstOrCreate(['forum_auth_user_id' => \Auth::user()->id]);
+        $user->forum_auth_user_id = \Auth::user()->id;
+        $user->email = $request->input('email');
 
-		$user = \Auth::user();
-		return view('home', ['user' => $user]);
-	}
+        // Only save new passwords
+        if($request->input('password') != $user->password){
+            $user->password = bcrypt($request->input('password'));
+        }
+
+        $user->username = \Auth::user()->character_name;
+        $user->corp_id = $lookup->corporation->id;
+        $user->corp_name = $lookup->corporation->name;
+        $user->alliance_id = $lookup->alliance->id;
+        $user->alliance_name = $lookup->alliance->name;
+
+        $user->save();
+
+        return redirect()->route('home');
+    }
+
 
 }

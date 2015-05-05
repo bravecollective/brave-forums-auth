@@ -25,4 +25,7 @@ Route::group(array('before' => 'auth'), function() {
 
 	// Logout of the app
 	Route::get('logout', array('as' => 'logout', 'uses' => 'LoginController@logoutAction'));
+
+    //Update user info
+    Route::post('/update', array('as' => 'update', 'uses' => 'HomeController@updateAction'));
 });
