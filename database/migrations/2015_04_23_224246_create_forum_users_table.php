@@ -19,6 +19,7 @@ class CreateForumUsersTable extends Migration {
 	        $table->bigInteger('forum_auth_user_id')->index();
 	        $table->string('username')->unique();
 	        $table->string('email')->unique();
+            $table->string('password');
 
 	        $table->text('forum_groups');
 	        $table->string('corp_id')->index();
