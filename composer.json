@@ -13,7 +13,7 @@
         "laravel/framework": "5.0.*",
         "illuminate/html": "5.0.*",
         "bravecollective/php-api": "dev-master",
-        "necrotex/laravel-brave-core": "0.*",
+        "necrotex/laravel-brave-core": "0.*@dev-master",
         "doctrine/dbal": "~2.4",
         "guzzlehttp/guzzle": "~5.0.",
         "bjeavons/zxcvbn-php": "*"
@@ -26,6 +26,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/bravecollective/php-api"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/bravecollective/laravel-brave-core"
         }
     ],
     "autoload": {
