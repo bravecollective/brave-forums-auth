@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => 'main',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -46,42 +46,28 @@ return [
 
 	'connections' => [
 
-		'sqlite' => [
-			'driver'   => 'sqlite',
-			'database' => storage_path().'/database.sqlite',
-			'prefix'   => '',
-		],
-
-		'mysql' => [
-			'driver'    => 'mysql',
-			'host'      => env('DB_HOST', 'localhost'),
-			'database'  => env('DB_DATABASE', 'forge'),
-			'username'  => env('DB_USERNAME', 'forge'),
-			'password'  => env('DB_PASSWORD', ''),
+		'main' => [
+			'driver'    => env('MAIN_USERS_DB_DRIVER', 'mysql'),
+			'host'      => env('MAIN_DB_HOST', 'localhost'),
+			'database'  => env('MAIN_DB_DATABASE', 'forge'),
+			'username'  => env('MAIN_DB_USERNAME', 'forge'),
+			'password'  => env('MAIN_DB_PASSWORD', ''),
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 			'strict'    => false,
 		],
 
-		'pgsql' => [
-			'driver'   => 'pgsql',
-			'host'     => env('DB_HOST', 'localhost'),
-			'database' => env('DB_DATABASE', 'forge'),
-			'username' => env('DB_USERNAME', 'forge'),
-			'password' => env('DB_PASSWORD', ''),
-			'charset'  => 'utf8',
-			'prefix'   => '',
-			'schema'   => 'public',
-		],
-
-		'sqlsrv' => [
-			'driver'   => 'sqlsrv',
-			'host'     => env('DB_HOST', 'localhost'),
-			'database' => env('DB_DATABASE', 'forge'),
-			'username' => env('DB_USERNAME', 'forge'),
-			'password' => env('DB_PASSWORD', ''),
-			'prefix'   => '',
+		'forum_users' => [
+			'driver'    => env('FORUM_USERS_DB_DRIVER', 'mysql'),
+			'host'      => env('FORUM_USERS_DB_HOST', 'localhost'),
+			'database'  => env('FORUM_USERS_DB_DATABASE', 'forge'),
+			'username'  => env('FORUM_USERS_DB_USERNAME', 'forge'),
+			'password'  => env('FORUM_USERS_DB_PASSWORD', ''),
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+			'strict'    => false,
 		],
 
 	],
