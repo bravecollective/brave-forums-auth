@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\ForumUser;
+use App\Http\Requests\UpdateFormRequest;
 use Illuminate\Http\Request;
 use ZxcvbnPhp\Zxcvbn;
 
@@ -41,10 +42,10 @@ class HomeController extends Controller {
     /**
      * Update the Forum User
      *
-     * @param \App\Http\Requests\UpdateFormRequest $request
+     * @param UpdateFormRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateAction(\App\Http\Requests\UpdateFormRequest $request){
+    public function updateAction(UpdateFormRequest $request){
 
         $api = \App::make('CoreApi');
         $lookup = $api->lookup->character(['search' => \Auth::user()->id]);
@@ -54,8 +55,8 @@ class HomeController extends Controller {
         $user->email = $request->input('email');
 
         // Only save new passwords
-        if($request->input('password') != $user->password){
-            $user->password = bcrypt($request->input('password'));
+        if($request->input('password') === $request->input('password_confirmed')) {
+            $user->password = \Hash::make($request->input('password'));
         }
 
         $user->username = \Auth::user()->character_name;
@@ -68,6 +69,4 @@ class HomeController extends Controller {
 
         return redirect()->route('home');
     }
-
-
 }

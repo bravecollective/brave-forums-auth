@@ -1,7 +1,6 @@
 <?php namespace App\Http\Requests;
 
 use App\ForumUser;
-use App\Http\Requests\Request;
 
 class UpdateFormRequest extends Request {
 
@@ -22,14 +21,14 @@ class UpdateFormRequest extends Request {
 	 */
 	public function rules()
 	{
-
         $rules = [];
-        $rules['password'] = 'required';
 
         if(ForumUser::find(['forum_auth_user_id' => \Auth::user()->id])){
             $rules['email'] = 'required|email|max:255';
+	        $rules['password'] = 'required|confirmed';
         } else {
             $rules['email'] = 'required|email|max:255|unique:forum_users';
+	        $rules['password'] = 'confirmed';
         }
 
 		return $rules;
