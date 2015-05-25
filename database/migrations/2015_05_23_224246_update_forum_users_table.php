@@ -14,9 +14,8 @@ class UpdateForumUsersTable extends Migration {
     {
 	    Schema::table('forum_users', function($table)
 	    {
-		    $table->bigInteger('alliance_id')->nullable()->change();
-		    $table->bigInteger('corp_id')->nullable()->change();
-		    $table->string('account_id', 128)->change();
+		    $table->bigInteger('alliance_id')->nullable()->default(null)->change();
+		    $table->bigInteger('corp_id')->nullable()->default(null)->change();
 		    $table->dropUnique('forum_users_username_unique');
 		    $table->dropColumn('username');
 	    });
