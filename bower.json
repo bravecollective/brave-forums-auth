@@ -1,4 +1,8 @@
 {
+  "name": "brave-forums-auth",
+  "version": "0.1.0",
+  "license": "MIT License",
+  "private": true,
   "dependencies": {
     "bootstrap": "~3.3.4",
     "font-awesome": "~4.3.0"
