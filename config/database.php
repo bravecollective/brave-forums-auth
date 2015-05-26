@@ -70,6 +70,18 @@ return [
 			'strict'    => false,
 		],
 
+		'forum' => [
+			'driver'    => env('FORUM_DB_DRIVER', 'mysql'),
+			'host'      => env('FORUM_DB_HOST', 'localhost'),
+			'database'  => env('FORUM_DB_DATABASE', 'forge'),
+			'username'  => env('FORUM_DB_USERNAME', 'forge'),
+			'password'  => env('FORUM_DB_PASSWORD', ''),
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+			'strict'    => false,
+		],
+
 	],
 
 	/*
