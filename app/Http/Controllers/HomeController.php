@@ -51,8 +51,10 @@ class HomeController extends Controller {
         $forum_user->email = $request->input('email');
 
         // Only save new passwords
+	    $password_update = '';
         if($request->input('password') !== '' && $request->input('password') === $request->input('password_confirmation')) {
             $forum_user->password = \Hash::make($request->input('password'));
+	        $password_update = ' and password';
         }
 
         $forum_user->username = \Auth::user()->character_name;
@@ -63,7 +65,7 @@ class HomeController extends Controller {
 
         $forum_user->save();
 
-	    Session::flash('msg', 'Your data was updated.');
+	    Session::flash('msg', 'Your email address'.$password_update.' was updated.');
 
         return redirect()->route('home');
     }
