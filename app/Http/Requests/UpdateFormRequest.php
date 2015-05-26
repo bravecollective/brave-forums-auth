@@ -22,7 +22,7 @@ class UpdateFormRequest extends Request {
 	public function rules()
 	{
         $rules = [];
-		$rules['email'] = 'required|email|max:255|unique:forum_users';
+		$rules['email'] = 'required|email|max:255';
 
         if(ForumUser::find(['forum_auth_user_id' => \Auth::user()->id])){
 	        $rules['password'] = 'confirmed';

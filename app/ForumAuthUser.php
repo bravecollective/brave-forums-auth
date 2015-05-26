@@ -9,7 +9,6 @@ use Brave\Core\Models\CoreAuthUser;
  */
 class ForumAuthUser extends CoreAuthUser {
 
-
 	/**
 	 * Group List Relationship
 	 *
