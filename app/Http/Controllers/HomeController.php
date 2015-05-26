@@ -65,7 +65,7 @@ class HomeController extends Controller {
 
         $forum_user->save();
 
-	    Session::flash('msg', 'Your email address'.$password_update.' was updated.');
+	    \Session::flash('msg', 'Your email address'.$password_update.' was updated.');
 
         return redirect()->route('home');
     }
