@@ -45,25 +45,21 @@ class HomeController extends Controller {
      * @param UpdateFormRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateAction(UpdateFormRequest $request){
-
-        $api = \App::make('CoreApi');
-        $lookup = $api->lookup->character(['search' => \Auth::user()->id]);
-
-        $user = ForumUser::firstOrCreate(['forum_auth_user_id' => \Auth::user()->id]);
+    public function updateAction(UpdateFormRequest $request) {
+	    $user = ForumUser::firstOrCreate(['forum_auth_user_id' => \Auth::user()->id]);
         $user->forum_auth_user_id = \Auth::user()->id;
         $user->email = $request->input('email');
 
         // Only save new passwords
-        if($request->input('password') === $request->input('password_confirmed')) {
+        if(!empty($request->input('password')) && $request->input('password') === $request->input('password_confirmed')) {
             $user->password = \Hash::make($request->input('password'));
         }
 
         $user->username = \Auth::user()->character_name;
-        $user->corp_id = $lookup->corporation->id;
-        $user->corp_name = $lookup->corporation->name;
-        $user->alliance_id = $lookup->alliance->id;
-        $user->alliance_name = $lookup->alliance->name;
+        $user->corp_id = \Auth::user()->corporation_id;
+        $user->corp_name = \Auth::user()->corporation_name;
+        $user->alliance_id = \Auth::user()->alliance_id;
+        $user->alliance_name = \Auth::user()->alliance_name;
 
         $user->save();
 
