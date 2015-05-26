@@ -16,7 +16,7 @@
                             </a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">{{ $user->character_name }}</h4>
+                            <h4 class="media-heading">{{ $user->character_name }} <span class="grey">in</span> {{ $user->coroporation_name }} [{{ $user->alliance_name }}]</h4>
                             <p>
                                 @if( $forum_user->exists )
                                     <p>
@@ -25,7 +25,7 @@
                                     </p>
                                 @else
                                     <p>
-                                        Active: <strong>No.</strong> <br />
+                                        Forum Account Active: <strong>No.</strong> <br />
                                         Please create a forum user below...
                                     </p>
                                 @endif
@@ -59,7 +59,7 @@
                                 value="{{ $forum_user->exists ? $forum_user->email : "" }}">
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group password-field">
                             <label for="password">Password</label>
                             <input type="password" name="password" class="form-control" id="password" value=""
                                    placeholder="{{ $forum_user->exists ? 'Password is set, enter a new one here to update it...' : 'Enter a password here...' }}">
@@ -81,7 +81,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" class="btn btn-default btn-block" value="Save">
+                            <input type="submit" class="btn btn-default btn-block btn-success" value="Save">
                         </div>
                     </div>
                 </div>
