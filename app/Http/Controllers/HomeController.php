@@ -46,22 +46,24 @@ class HomeController extends Controller {
      * @return \Illuminate\Http\RedirectResponse
      */
     public function updateAction(UpdateFormRequest $request) {
-	    $user = ForumUser::firstOrCreate(['forum_auth_user_id' => \Auth::user()->id]);
-        $user->forum_auth_user_id = \Auth::user()->id;
-        $user->email = $request->input('email');
+	    $forum_user = ForumUser::firstOrCreate(['forum_auth_user_id' => \Auth::user()->id]);
+        $forum_user->forum_auth_user_id = \Auth::user()->id;
+        $forum_user->email = $request->input('email');
 
         // Only save new passwords
-        if(!empty($request->input('password')) && $request->input('password') === $request->input('password_confirmed')) {
-            $user->password = \Hash::make($request->input('password'));
+        if($request->input('password') !== '' && $request->input('password') === $request->input('password_confirmation')) {
+            $forum_user->password = \Hash::make($request->input('password'));
         }
 
-        $user->username = \Auth::user()->character_name;
-        $user->corp_id = \Auth::user()->corporation_id;
-        $user->corp_name = \Auth::user()->corporation_name;
-        $user->alliance_id = \Auth::user()->alliance_id;
-        $user->alliance_name = \Auth::user()->alliance_name;
+        $forum_user->username = \Auth::user()->character_name;
+        $forum_user->corp_id = \Auth::user()->corporation_id;
+        $forum_user->corp_name = \Auth::user()->corporation_name;
+        $forum_user->alliance_id = \Auth::user()->alliance_id;
+        $forum_user->alliance_name = \Auth::user()->alliance_name;
 
-        $user->save();
+        $forum_user->save();
+
+	    Session::flash('msg', 'Your data was updated.');
 
         return redirect()->route('home');
     }

@@ -3,6 +3,13 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
+
+            @if (\Session::get('msg'))
+                <div class="alert alert-info" role="alert">
+                    {{ \Session::get('msg') }}
+                </div>
+            @endforeach
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Core User Info</h3>
@@ -48,7 +55,6 @@
 
                         @foreach ($errors->all() as $message)
                             <div class="alert alert-danger" role="alert">
-                                <strong>Oops! There were some errors:</strong><br />
                                 {{ $message }}
                             </div>
                         @endforeach
