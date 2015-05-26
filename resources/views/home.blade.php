@@ -8,7 +8,7 @@
                 <div class="alert alert-info" role="alert">
                     {{ \Session::get('msg') }}
                 </div>
-            @endforeach
+            @endif
 
             <div class="panel panel-default">
                 <div class="panel-heading">
