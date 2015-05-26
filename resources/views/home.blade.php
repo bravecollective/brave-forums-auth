@@ -16,7 +16,7 @@
                             </a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">{{ $user->character_name }} <span class="grey">in</span> {{ $user->coroporation_name }} [{{ $user->alliance_name }}]</h4>
+                            <h4 class="media-heading">{{ $user->character_name }} <span class="grey">in</span> {{ $user->corporation_name }} [{{ $user->alliance_name }}]</h4>
                             <p>
                                 @if( $forum_user->exists )
                                     <p>
