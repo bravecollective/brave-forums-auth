@@ -12,6 +12,12 @@ class ForumUser extends Model {
 	protected $table = 'forum_users';
 
 	/**
+	 * The database connection used by the model.
+	 *
+	 * @var string
+	 */
+	protected $connection = 'forum_users';
+	/**
 	 * The attributes that are mass assignable.
 	 *
 	 * @var array

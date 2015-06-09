@@ -1,6 +1,6 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
+    "name": "bravecollective/brave-forums-auth",
+    "description": "Invision Power Board v4 Auth connector for Brave Core",
     "keywords": [
         "framework",
         "laravel"
@@ -11,6 +11,8 @@
         "laravel/framework": "5.1.*",
         "illuminate/html": "5.0.*",
         "filp/whoops": "~1.0",
+        "doctrine/dbal": "~2.4",
+        "guzzlehttp/guzzle": "~5.0.",
         "bravecollective/php-api": "1.0.3",
         "necrotex/laravel-brave-core": "0.*",
         "bjeavons/zxcvbn-php": "0.1.*"

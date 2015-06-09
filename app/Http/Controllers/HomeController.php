@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use App\ForumUser;
+use App\Http\Requests\UpdateFormRequest;
 use Illuminate\Http\Request;
 use ZxcvbnPhp\Zxcvbn;
 
@@ -31,34 +33,40 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-		$user = \Auth::user();
-		return view('home', ['user' => $user]);
+		$auth_user = \Auth::user();
+		$forum_user = ForumUser::firstOrNew(['forum_auth_user_id' => \Auth::user()->id]);
+
+		return view('home', ['user' => $auth_user, 'forum_user' => $forum_user]);
 	}
 
-	/**
-	 * Show the application dashboard to the user.
-	 *
-	 * @param Request $request
-	 * @return Response
-	 */
-	public function updateForumUser(Request $request)
-	{
-		$this->validate($request, [
-			'email' => 'required|unique|max:255',
-			'password' => 'required',
-		]);
+    /**
+     * Update the Forum User
+     *
+     * @param UpdateFormRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateAction(UpdateFormRequest $request) {
+	    $forum_user = ForumUser::firstOrCreate(['forum_auth_user_id' => \Auth::user()->id]);
+        $forum_user->forum_auth_user_id = \Auth::user()->id;
+        $forum_user->email = $request->input('email');
 
-		$userData = array(
-			'Marco',
-			'marco@example.com'
-		);
+        // Only save new passwords
+	    $password_update = '';
+        if($request->input('password') !== '' && $request->input('password') === $request->input('password_confirmation')) {
+            $forum_user->password = \Hash::make($request->input('password'));
+	        $password_update = ' and password';
+        }
 
-		$zxcvbn = new Zxcvbn();
-		$strength = $zxcvbn->passwordStrength('password', $userData);
-		echo $strength['score'];
+        $forum_user->username = \Auth::user()->character_name;
+        $forum_user->corp_id = \Auth::user()->corporation_id;
+        $forum_user->corp_name = \Auth::user()->corporation_name;
+        $forum_user->alliance_id = \Auth::user()->alliance_id;
+        $forum_user->alliance_name = \Auth::user()->alliance_name;
 
-		$user = \Auth::user();
-		return view('home', ['user' => $user]);
-	}
+        $forum_user->save();
 
+	    \Session::flash('msg', 'Your email address'.$password_update.' was updated.');
+
+        return redirect()->route('home');
+    }
 }
